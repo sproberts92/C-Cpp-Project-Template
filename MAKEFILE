@@ -1,0 +1,23 @@
+CC = cl
+CFLAGS = /Ox \
+/I ext\MulticoreBSP-for-C\ \
+/I ext\unistd\include \
+/I ext\pthreads-win32\prebuilt-dll-2-9-1-release\include \
+/D HAVE_STRUCT_TIMESPEC
+
+LDFLAGS = ext\pthreads-win32\prebuilt-dll-2-9-1-release\lib\x64\pthreadVC2.lib
+
+SOURCES = src\test_1.c ext\MulticoreBSP-for-C\mcbsp.c ext\MulticoreBSP-for-C\mcinternal.c ext\MulticoreBSP-for-C\mcutil.c
+OBJECTS = $(SOURCES:*.c=build\*.obj)
+EXECUTABLE = bin\CFD
+
+all: $(SOURCES) $(EXECUTABLE)
+
+$(EXECUTABLE): $(OBJECTS)
+	$(CC) $(LDFLAGS) -o $@ $** $(CFLAGS)
+
+build\*.obj: *.c
+	$(CC) -c -o $@ $< $(CFLAGS)
+
+clean:
+	del *.obj *.exp *.lib
