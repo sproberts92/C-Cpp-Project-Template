@@ -2,9 +2,9 @@
 
 From the [MulticoreBSP website](http://www.multicorebsp.com/):
 
-Valiant introduced the BSP model to abstractly represent a parallel computer The model enables the simplified design of parallel algorithms, and allows for the transparent analysis of those algorithms. To easily bridge design and analysis to actual codes, BSP programming interfaces exist. MulticoreBSP is one of those. 
+> Valiant introduced the BSP model to abstractly represent a parallel computer The model enables the simplified design of parallel algorithms, and allows for the transparent analysis of those algorithms. To easily bridge design and analysis to actual codes, BSP programming interfaces exist. MulticoreBSP is one of those. 
 
-## Issues with the library as provided on the [MulticoreBSP website](http://www.multicorebsp.com/)
+## Issues with the MulticoreBSP library on Windows
 
 The library does not officially support Windows. There are some windows object files provided on the website but they are outdated and cannot be linked with projects compiled using Visual Studio 2015 (VS2015).
 
