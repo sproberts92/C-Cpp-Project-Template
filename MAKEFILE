@@ -11,6 +11,9 @@ OBJECT_DIR = build
 
 LIBS = ext\pthreads-win32\prebuilt-dll-2-9-1-release\lib\x64\pthreadVC2.lib
 
+DLLS = bin\pthreadVC2.dll
+DLLS_SRC = ext\pthreads-win32\prebuilt-dll-2-9-1-release\dll\x64\pthreadVC2.dll
+
 SOURCES = src\test_2.c ext\MulticoreBSP-for-C\mcbsp.c ext\MulticoreBSP-for-C\mcinternal.c ext\MulticoreBSP-for-C\mcutil.c
 # OBJECTS = $(SOURCES:*.c=build\*.obj)
 OBJECTS = build\test_2.obj build\mcbsp.obj build\mcinternal.obj  build\mcutil.obj
@@ -20,6 +23,9 @@ all: $(EXECUTABLE) $(DLLS) $(OBJECTS)
 
 $(EXECUTABLE): $(OBJECTS)
 	$(LINK) $(OBJECTS) $(LIBS) /OUT:$(EXECUTABLE)
+
+$(DLLS): $(DLLS_SRC)
+	copy $** $@
 
 $(OBJECTS): $(SOURCES)
 	$(CC) $(LDFLAGS) /c /Fo.\$(OBJECT_DIR)\ $@ $** $(CFLAGS)
