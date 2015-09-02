@@ -1,23 +1,28 @@
 CC = cl
+LINK = link
 CFLAGS = /Ox \
 /I ext\MulticoreBSP-for-C\ \
 /I ext\unistd\include \
 /I ext\pthreads-win32\prebuilt-dll-2-9-1-release\include \
 /D HAVE_STRUCT_TIMESPEC
 
-LDFLAGS = ext\pthreads-win32\prebuilt-dll-2-9-1-release\lib\x64\pthreadVC2.lib
+SOURCE_DIR = src
+OBJECT_DIR = build
 
-SOURCES = src\test_1.c ext\MulticoreBSP-for-C\mcbsp.c ext\MulticoreBSP-for-C\mcinternal.c ext\MulticoreBSP-for-C\mcutil.c
-OBJECTS = $(SOURCES:*.c=build\*.obj)
-EXECUTABLE = bin\CFD
+LIBS = ext\pthreads-win32\prebuilt-dll-2-9-1-release\lib\x64\pthreadVC2.lib
 
-all: $(SOURCES) $(EXECUTABLE)
+SOURCES = src\test_2.c ext\MulticoreBSP-for-C\mcbsp.c ext\MulticoreBSP-for-C\mcinternal.c ext\MulticoreBSP-for-C\mcutil.c
+# OBJECTS = $(SOURCES:*.c=build\*.obj)
+OBJECTS = build\test_2.obj build\mcbsp.obj build\mcinternal.obj  build\mcutil.obj
+EXECUTABLE = bin\CFD.exe
+
+all: $(EXECUTABLE) $(DLLS) $(OBJECTS)
 
 $(EXECUTABLE): $(OBJECTS)
-	$(CC) $(LDFLAGS) -o $@ $** $(CFLAGS)
+	$(LINK) $(OBJECTS) $(LIBS) /OUT:$(EXECUTABLE)
 
-build\*.obj: *.c
-	$(CC) -c -o $@ $< $(CFLAGS)
+$(OBJECTS): $(SOURCES)
+	$(CC) $(LDFLAGS) /c /Fo.\$(OBJECT_DIR)\ $@ $** $(CFLAGS)
 
 clean:
-	del *.obj *.exp *.lib
+	del $(OBJECT_DIR)\*.obj bin\*.dll bin\*.exe
