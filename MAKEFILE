@@ -14,7 +14,10 @@ LIBS = ext\pthreads-win32\sources\pthreads-w32-2-9-1-release\pthreadVC2.lib
 DLLS = bin\pthreadVC2.dll
 DLLS_SRC = ext\pthreads-win32\sources\pthreads-w32-2-9-1-release\pthreadVC2.dll
 
-SOURCES = src\test_2.c ext\MulticoreBSP-for-C\mcbsp.c ext\MulticoreBSP-for-C\mcinternal.c ext\MulticoreBSP-for-C\mcutil.c
+BSP_SOURCES = ext\MulticoreBSP-for-C\mcbsp.c ext\MulticoreBSP-for-C\mcinternal.c ext\MulticoreBSP-for-C\mcutil.c
+USER_SOURCES = source.c
+
+SOURCES = src\$(USER_SOURCES) $(BSP_SOURCES)
 # OBJECTS = $(SOURCES:*.c=build\*.obj)
 OBJECTS = build\test_2.obj build\mcbsp.obj build\mcinternal.obj  build\mcutil.obj
 EXECUTABLE = bin\CFD.exe
