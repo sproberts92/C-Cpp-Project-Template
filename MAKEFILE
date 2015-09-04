@@ -39,7 +39,7 @@ $(DLLS): $(DLLS_SRC)
 	copy $** $@
 
 $(OBJECTS): $(SOURCES)
-	$(CC) $(LDFLAGS) /c /Fo.\$(OBJECT_DIR)\ $@ $** $(CFLAGS)
+	$(CC) $(LDFLAGS) /c /Fo.\$(OBJECT_DIR)\ $** $(CFLAGS)
 
 clean:
 	del $(OBJECT_DIR)\*.obj bin\*.dll bin\*.exe
