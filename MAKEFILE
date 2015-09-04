@@ -1,3 +1,7 @@
+USER_SOURCES = source.c
+EXECUTABLE = bin\BSP.exe
+
+###################################
 CC = cl
 LINK = link
 CFLAGS = /Ox \
@@ -14,13 +18,11 @@ LIBS = ext\pthreads-win32\sources\pthreads-w32-2-9-1-release\pthreadVC2.lib
 DLLS = bin\pthreadVC2.dll
 DLLS_SRC = ext\pthreads-win32\sources\pthreads-w32-2-9-1-release\pthreadVC2.dll
 
-BSP_SOURCES = ext\MulticoreBSP-for-C\mcbsp.c ext\MulticoreBSP-for-C\mcinternal.c ext\MulticoreBSP-for-C\mcutil.c
-USER_SOURCES = source.c
+BSP_SOURCES = mcbsp.c mcinternal.c mcutil.c
+SOURCES = src\$(USER_SOURCES) ext\MulticoreBSP-for-C\$(BSP_SOURCES: = ext\MulticoreBSP-for-C\)
 
-SOURCES = src\$(USER_SOURCES) $(BSP_SOURCES)
-# OBJECTS = $(SOURCES:*.c=build\*.obj)
-OBJECTS = build\test_2.obj build\mcbsp.obj build\mcinternal.obj  build\mcutil.obj
-EXECUTABLE = bin\CFD.exe
+_OBJECTS = build\$(USER_SOURCES) build\$(BSP_SOURCES: = build\)
+OBJECTS = $(_OBJECTS:.c=.obj)
 
 all: $(EXECUTABLE) $(DLLS) $(OBJECTS)
 
