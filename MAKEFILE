@@ -26,6 +26,12 @@ OBJECTS = $(_OBJECTS:.c=.obj)
 
 all: $(EXECUTABLE) $(DLLS) $(OBJECTS)
 
+echo_objects:
+	echo $(OBJECTS)
+
+echo_sources:
+	echo $(SOURCES)
+
 $(EXECUTABLE): $(OBJECTS)
 	$(LINK) $(OBJECTS) $(LIBS) /OUT:$(EXECUTABLE)
 
