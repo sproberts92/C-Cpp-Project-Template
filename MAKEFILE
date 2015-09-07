@@ -4,7 +4,7 @@ EXECUTABLE = bin\BSP.exe
 ###################################
 CC = cl
 LINK = link
-CFLAGS = /Ox \
+CFLAGS = /Ox /c /Fo.\$(OBJECT_DIR)\ \
 /I ext\MulticoreBSP-for-C\ \
 /I ext\unistd\include \
 /I ext\pthreads-win32\sources\pthreads-w32-2-9-1-release \
@@ -19,9 +19,7 @@ DLLS = bin\pthreadVC2.dll
 DLLS_SRC = ext\pthreads-win32\sources\pthreads-w32-2-9-1-release\pthreadVC2.dll
 
 SOURCES = src\$(USER_SOURCES)
-
-EXT_OBJECTS = ext\multicorebsp-for-c\*.obj
-OBJECTS = build\$(USER_SOURCES:.c=.obj) $(EXT_OBJECTS)
+OBJECTS = build\$(USER_SOURCES:.c=.obj) ext\multicorebsp-for-c\*.obj
 
 all: $(EXECUTABLE) $(DLLS) $(OBJECTS)
 
@@ -37,8 +35,8 @@ $(EXECUTABLE): $(OBJECTS)
 $(DLLS): $(DLLS_SRC)
 	copy $** $@
 
-$(OBJECTS): $(SOURCES)
-	$(CC) $(LDFLAGS) /c /Fo.\$(OBJECT_DIR)\ $** $(CFLAGS)
+{src\}.c{build\}.obj::
+	$(CC) $(CFLAGS) $<
 
 clean:
 	del $(OBJECT_DIR)\*.obj bin\*.dll bin\*.exe
