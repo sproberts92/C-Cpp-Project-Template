@@ -1,27 +1,30 @@
 USER_SOURCES = source.c
-EXECUTABLE = bin\BSP.exe
-
+EXECUTABLE = BSP.exe
+###################################
+SOURCE_DIR = src
+OBJECT_DIR = build
+BINARY_DIR = bin
+EXTERN_DIR = ext
 ###################################
 CC = cl
 LINK = link
 CFLAGS = /Ox /c /Fo.\$(OBJECT_DIR)\ \
-/I ext\MulticoreBSP-for-C\ \
-/I ext\unistd\include \
-/I ext\pthreads-win32\sources\pthreads-w32-2-9-1-release \
+/I $(EXTERN_DIR)\MulticoreBSP-for-C\ \
+/I $(EXTERN_DIR)\unistd\include \
+/I $(EXTERN_DIR)\pthreads-win32\sources\pthreads-w32-2-9-1-release \
 /D HAVE_STRUCT_TIMESPEC
 
-SOURCE_DIR = src
-OBJECT_DIR = build
+LIBS = $(EXTERN_DIR)\pthreads-win32\sources\pthreads-w32-2-9-1-release\pthreadVC2.lib
 
-LIBS = ext\pthreads-win32\sources\pthreads-w32-2-9-1-release\pthreadVC2.lib
+DLLS = $(BINARY_DIR)\pthreadVC2.dll
+DLLS_SRC = $(EXTERN_DIR)\pthreads-win32\sources\pthreads-w32-2-9-1-release\pthreadVC2.dll
 
-DLLS = bin\pthreadVC2.dll
-DLLS_SRC = ext\pthreads-win32\sources\pthreads-w32-2-9-1-release\pthreadVC2.dll
+SOURCES = $(SOURCE_DIR)\$(USER_SOURCES)
+OBJECTS = $(OBJECT_DIR)\$(USER_SOURCES:.c=.obj) $(EXTERN_DIR)\multicorebsp-for-c\*.obj
 
-SOURCES = src\$(USER_SOURCES)
-OBJECTS = build\$(USER_SOURCES:.c=.obj) ext\multicorebsp-for-c\*.obj
+BINARY = $(BINARY_DIR)\$(EXECUTABLE)
 
-all: $(EXECUTABLE) $(DLLS) $(OBJECTS)
+all: $(BINARY) $(DLLS) $(OBJECTS)
 
 echo_objects:
 	echo $(OBJECTS)
@@ -29,14 +32,14 @@ echo_objects:
 echo_sources:
 	echo $(SOURCES)
 
-$(EXECUTABLE): $(OBJECTS)
-	$(LINK) $(OBJECTS) $(LIBS) /OUT:$(EXECUTABLE)
+$(BINARY): $(OBJECTS)
+	$(LINK) $(OBJECTS) $(LIBS) /OUT:$(BINARY)
 
 $(DLLS): $(DLLS_SRC)
 	copy $** $@
 
-{src\}.c{build\}.obj::
+{$(SOURCE_DIR)\}.c{$(OBJECT_DIR)\}.obj::
 	$(CC) $(CFLAGS) $<
 
 clean:
-	del $(OBJECT_DIR)\*.obj bin\*.dll bin\*.exe
+	del $(OBJECT_DIR)\*.obj $(BINARY_DIR)\*.dll $(BINARY_DIR)\*.exe
