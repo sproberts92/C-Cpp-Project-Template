@@ -18,11 +18,10 @@ LIBS = ext\pthreads-win32\sources\pthreads-w32-2-9-1-release\pthreadVC2.lib
 DLLS = bin\pthreadVC2.dll
 DLLS_SRC = ext\pthreads-win32\sources\pthreads-w32-2-9-1-release\pthreadVC2.dll
 
-BSP_SOURCES = mcbsp.c mcinternal.c mcutil.c
-SOURCES = src\$(USER_SOURCES) ext\MulticoreBSP-for-C\$(BSP_SOURCES: = ext\MulticoreBSP-for-C\)
+SOURCES = src\$(USER_SOURCES)
 
-_OBJECTS = build\$(USER_SOURCES) build\$(BSP_SOURCES: = build\)
-OBJECTS = $(_OBJECTS:.c=.obj)
+EXT_OBJECTS = ext\multicorebsp-for-c\*.obj
+OBJECTS = build\$(USER_SOURCES:.c=.obj) $(EXT_OBJECTS)
 
 all: $(EXECUTABLE) $(DLLS) $(OBJECTS)
 
