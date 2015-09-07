@@ -8,11 +8,10 @@ EXTERN_DIR = ext
 ###################################
 CC = cl
 LINK = link
-CFLAGS = /Ox /c /Fo.\$(OBJECT_DIR)\ \
+CFLAGS = /Ox /c \
+/Fo.\$(OBJECT_DIR)\ \
 /I $(EXTERN_DIR)\MulticoreBSP-for-C\ \
-/I $(EXTERN_DIR)\unistd\include \
-/I $(EXTERN_DIR)\pthreads-win32\sources\pthreads-w32-2-9-1-release \
-/D HAVE_STRUCT_TIMESPEC
+/I $(EXTERN_DIR)\pthreads-win32\sources\pthreads-w32-2-9-1-release
 
 LIBS = $(EXTERN_DIR)\pthreads-win32\sources\pthreads-w32-2-9-1-release\pthreadVC2.lib
 
