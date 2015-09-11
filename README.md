@@ -39,3 +39,41 @@ Also a standard unix library not available on Windows, a port is available thank
 
 ### unistd
 Another unix library not available on Windows, a port has been [communally developed on Stack Overflow](http://stackoverflow.com/questions/341817/is-there-a-replacement-for-unistd-h-for-windows-visual-c).
+
+## Project structure
+
+User created source files should be placed in the `src` directory. Upon building, the resultant binary will be placed in `bin` along with necessary dlls (at present, just `pthreadVC2.dll`).
+
+The `build` directory contains `.obj` files generated during the build process.
+
+Finally, the dependencies mentioned in the section above are located in the `ext` directory. They are present via the use of git submodules (see usage section, below). For more information the repositories are hosted at
+```
+https://bitbucket.org/sproberts92/multicorebsp-for-c.git
+https://bitbucket.org/sproberts92/pthreads-win32.git
+https://bitbucket.org/sproberts92/getopt.git
+https://bitbucket.org/sproberts92/unistd.git
+```
+
+## Usage
+
+As mentioned above, the external dependencies are present via the use of git submodules. In order to obtain the repository and the external dependencies, run the following commands
+
+```
+git clone https://bitbucket.org/sproberts92/learning-bsp.git
+git submodule init
+git submodule update
+```
+
+or more simply
+
+```
+git clone https://bitbucket.org/sproberts92/learning-bsp.git --recursive
+```
+
+Navigate to `ext\pthreads-win32\sources\pthreads-w32-2-9-1-release` and run the command `nmake clean VC`. To build the appropriate version of Pthreads.
+
+Navigate to `ext\multicorebsp-for-c` and run the command `nmake /F NMakefile` to build MulticoreBSP.
+
+You may now begin writing your application, placing source files in the `src` directory. Change the first line of `MAKEFILE` to the name of your source file and add any others as needed. You may also alter the name of the binary produced in the second line.
+
+Build your application by simply running nmake. The resultant binary is placed in the `bin` directory and the `pthreadVC2.dll` is copied there also.
