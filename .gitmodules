@@ -1,12 +1,12 @@
 [submodule "ext/multicorebsp-for-c"]
 	path = ext/multicorebsp-for-c
-	url = https://sproberts92@bitbucket.org/sproberts92/multicorebsp-for-c.git
+	url = https://bitbucket.org/sproberts92/multicorebsp-for-c.git
 [submodule "ext/pthreads-win32"]
 	path = ext/pthreads-win32
-	url = https://sproberts92@bitbucket.org/sproberts92/pthreads-win32.git
+	url = https://bitbucket.org/sproberts92/pthreads-win32.git
 [submodule "ext/getopt"]
 	path = ext/getopt
-	url = https://sproberts92@bitbucket.org/sproberts92/getopt.git
+	url = https://bitbucket.org/sproberts92/getopt.git
 [submodule "ext/unistd"]
 	path = ext/unistd
-	url = https://sproberts92@bitbucket.org/sproberts92/unistd.git
+	url = https://bitbucket.org/sproberts92/unistd.git
