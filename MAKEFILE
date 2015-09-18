@@ -26,7 +26,7 @@ echo_sources:
 	echo $(SOURCES)
 
 $(BINARY): $(OBJECTS)
-	$(LINK) $(OBJECTS) -lpthread -lc $(LIBS) -o $(BINARY)
+	$(LINK) $(OBJECTS) -lpthread -lc -lrt $(LIBS) -o $(BINARY)
 
 $(OBJECT_DIR)/%.o: $(SOURCE_DIR)/%.c
 	$(CC) $(CFLAGS) -c -o $@ $<
