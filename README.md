@@ -1,8 +1,79 @@
-# MulticoreBSP for Windows
+# MulticoreBSP Template
 
-From the [MulticoreBSP website](http://www.multicorebsp.com/):
+## What is MulticoreBSP?
+
+From the [MulticoreBSP website:](http://www.multicorebsp.com/)
 
 > Valiant introduced the BSP model to abstractly represent a parallel computer The model enables the simplified design of parallel algorithms, and allows for the transparent analysis of those algorithms. To easily bridge design and analysis to actual codes, BSP programming interfaces exist. MulticoreBSP is one of those. 
+
+## Project structure
+
+User created source files should be placed in the `src` directory. Upon building, the resultant binary will be placed in `bin` (along with necessary dlls on Windows, at present just `pthreadVC2.dll`).
+
+The `build` directory contains `.o` or `.obj` files generated during the build process.
+
+Finally, the dependencies mentioned in the section above are located in the `ext` directory. They are present via the use of git submodules (see usage section, below). 
+
+## Usage
+
+Obtain the repository using
+
+```
+git clone https://bitbucket.org/sproberts92/learning-bsp.git
+```
+
+How to proceed next is platform specific.
+
+---
+
+### Linux
+
+Only the Multicore-BSP library is requried on Linux. Obtain this submodule by running the following
+
+```
+git submodule update --init https://bitbucket.org/sproberts92/multicorebsp-for-c.git
+```
+
+Navigate to `ext\multicorebsp-for-c` and run the command `make` to build MulticoreBSP.
+
+### Windows
+
+On Windows extra dependencies are required, see the "Issues with the MulticoreBSP library on Windows" section below for more details.
+
+All submodule dependenies are required, so simply run
+
+```
+git submodule update --init
+```
+
+Navigate to `ext\pthreads-win32\sources\pthreads-w32-2-9-1-release` and run the command `nmake clean VC`. To build the appropriate version of Pthreads.
+
+Navigate to `ext\multicorebsp-for-c` and run the command `nmake /F NMakefile` to build MulticoreBSP.
+
+### OSX
+
+Not yet supported - work in progress.
+
+---
+
+You may now begin writing your application, placing source files in the `src` directory. Change the first line of `MAKEFILE` (Linux) or `NMAKEFILE` (Windows) to the name of your source file and add any others as needed. You may also alter the name of the binary produced in the second line.
+
+Build your application by simply running `make -f MAKEFILE` (Linux) or `nmake ./f NMAKEFILE` (Windows). The resultant binary can be run from the `bin` directory.
+
+## More info on external dependencies
+
+[More info on Multicore BSP.](http://www.multicorebsp.com/)
+[More info on Pthreads Win32.](https://www.sourceware.org/pthreads-win32/)
+[More info on unistd.](http://stackoverflow.com/questions/341817/is-there-a-replacement-for-unistd-h-for-windows-visual-c)
+[More info on getopt.](https://gist.github.com/superwills/5815344#file-getopt-c)
+
+The repositories are also mirrored on bitbucket at
+```
+https://bitbucket.org/sproberts92/multicorebsp-for-c.git
+https://bitbucket.org/sproberts92/pthreads-win32.git
+https://bitbucket.org/sproberts92/getopt.git
+https://bitbucket.org/sproberts92/unistd.git
+```
 
 ## Issues with the MulticoreBSP library on Windows
 
@@ -39,41 +110,3 @@ Also a standard unix library not available on Windows, a port is available thank
 
 ### unistd
 Another unix library not available on Windows, a port has been [communally developed on Stack Overflow](http://stackoverflow.com/questions/341817/is-there-a-replacement-for-unistd-h-for-windows-visual-c).
-
-## Project structure
-
-User created source files should be placed in the `src` directory. Upon building, the resultant binary will be placed in `bin` along with necessary dlls (at present, just `pthreadVC2.dll`).
-
-The `build` directory contains `.obj` files generated during the build process.
-
-Finally, the dependencies mentioned in the section above are located in the `ext` directory. They are present via the use of git submodules (see usage section, below). For more information the repositories are hosted at
-```
-https://bitbucket.org/sproberts92/multicorebsp-for-c.git
-https://bitbucket.org/sproberts92/pthreads-win32.git
-https://bitbucket.org/sproberts92/getopt.git
-https://bitbucket.org/sproberts92/unistd.git
-```
-
-## Usage
-
-As mentioned above, the external dependencies are present via the use of git submodules. In order to obtain the repository and the external dependencies, run the following commands
-
-```
-git clone https://bitbucket.org/sproberts92/learning-bsp.git
-git submodule init
-git submodule update
-```
-
-or more simply
-
-```
-git clone https://bitbucket.org/sproberts92/learning-bsp.git --recursive
-```
-
-Navigate to `ext\pthreads-win32\sources\pthreads-w32-2-9-1-release` and run the command `nmake clean VC`. To build the appropriate version of Pthreads.
-
-Navigate to `ext\multicorebsp-for-c` and run the command `nmake /F NMakefile` to build MulticoreBSP.
-
-You may now begin writing your application, placing source files in the `src` directory. Change the first line of `MAKEFILE` to the name of your source file and add any others as needed. You may also alter the name of the binary produced in the second line.
-
-Build your application by simply running nmake. The resultant binary is placed in the `bin` directory and the `pthreadVC2.dll` is copied there also.
