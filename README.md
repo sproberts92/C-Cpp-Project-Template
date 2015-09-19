@@ -63,8 +63,11 @@ Build your application by simply running `make -f MAKEFILE` (Linux) or `nmake ./
 ## More info on external dependencies
 
 [More info on Multicore BSP.](http://www.multicorebsp.com/)
+
 [More info on Pthreads Win32.](https://www.sourceware.org/pthreads-win32/)
+
 [More info on unistd.](http://stackoverflow.com/questions/341817/is-there-a-replacement-for-unistd-h-for-windows-visual-c)
+
 [More info on getopt.](https://gist.github.com/superwills/5815344#file-getopt-c)
 
 The repositories are also mirrored on bitbucket at
