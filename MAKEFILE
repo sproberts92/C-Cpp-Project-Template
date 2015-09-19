@@ -12,8 +12,8 @@ CFLAGS = -std=c99 -I $(EXTERN_DIR)/multicorebsp-for-c/
 
 LIBS = -L/$(EXTERN_DIR)/multicorebsp-for-c/lib/libmcbsp1.2.0.a
 
-SOURCES = $(SOURCE_DIR)/$(USER_SOURCES)
-OBJECTS = $(OBJECT_DIR)/$(USER_SOURCES:.c=.o) $(EXTERN_DIR)/multicorebsp-for-c/*.o
+SOURCES = $(USER_SOURCES:%.c=$(SOURCE_DIR)/%.c)
+OBJECTS = $(USER_SOURCES:%.c=$(OBJECT_DIR)/%.o) $(EXTERN_DIR)/multicorebsp-for-c/*.o
 
 BINARY = $(BINARY_DIR)/$(EXECUTABLE)
 
