@@ -20,10 +20,10 @@ BINARY = $(BINARY_DIR)/$(EXECUTABLE)
 all: $(BINARY) $(DLLS) $(OBJECTS)
 
 echo_objects:
-	echo $(OBJECTS)
+	@echo $(OBJECTS)
 
 echo_sources:
-	echo $(SOURCES)
+	@echo $(SOURCES)
 
 $(BINARY): $(OBJECTS)
 	$(LINK) $(OBJECTS) -lpthread -lc -lrt $(LIBS) -o $(BINARY)
