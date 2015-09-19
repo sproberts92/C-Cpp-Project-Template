@@ -18,8 +18,9 @@ LIBS = $(EXTERN_DIR)\pthreads-win32\sources\pthreads-w32-2-9-1-release\pthreadVC
 DLLS = $(BINARY_DIR)\pthreadVC2.dll
 DLLS_SRC = $(EXTERN_DIR)\pthreads-win32\sources\pthreads-w32-2-9-1-release\pthreadVC2.dll
 
-SOURCES = $(SOURCE_DIR)\$(USER_SOURCES)
-OBJECTS = $(OBJECT_DIR)\$(USER_SOURCES:.c=.obj) $(EXTERN_DIR)\multicorebsp-for-c\*.obj
+SOURCES = $(SOURCE_DIR)\$(USER_SOURCES: = src\)
+_OBJECTS = $(OBJECT_DIR)\$(USER_SOURCES: = build\)
+OBJECTS = $(_OBJECTS:.c=.obj) $(EXTERN_DIR)\multicorebsp-for-c\*.obj
 
 BINARY = $(BINARY_DIR)\$(EXECUTABLE)
 
