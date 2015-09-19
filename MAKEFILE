@@ -7,7 +7,6 @@ BINARY_DIR = bin
 EXTERN_DIR = ext
 ###################################
 CC = gcc
-LINK = gcc
 CFLAGS = -std=c99 -I $(EXTERN_DIR)/multicorebsp-for-c/
 
 LIBS = -L/$(EXTERN_DIR)/multicorebsp-for-c/lib/libmcbsp1.2.0.a
@@ -26,7 +25,7 @@ echo_sources:
 	@echo $(SOURCES)
 
 $(BINARY): $(OBJECTS)
-	$(LINK) $(OBJECTS) -lpthread -lc -lrt $(LIBS) -o $(BINARY)
+	$(CC) $(OBJECTS) -lpthread -lc -lrt $(LIBS) -o $(BINARY)
 
 $(OBJECT_DIR)/%.o: $(SOURCE_DIR)/%.c
 	$(CC) $(CFLAGS) -c -o $@ $<
