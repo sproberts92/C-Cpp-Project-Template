@@ -15,7 +15,6 @@ CFLAGS = /Ox /c \
 
 LIBS = $(EXTERN_DIR)\pthreads-win32\sources\pthreads-w32-2-9-1-release\pthreadVC2.lib
 
-DLLS = $(BINARY_DIR)\pthreadVC2.dll
 DLLS_SRC = $(EXTERN_DIR)\pthreads-win32\sources\pthreads-w32-2-9-1-release\pthreadVC2.dll
 
 SOURCES = $(SOURCE_DIR)\$(USER_SOURCES: = src\)
@@ -24,7 +23,7 @@ OBJECTS = $(_OBJECTS:.c=.obj) $(EXTERN_DIR)\multicorebsp-for-c\*.obj
 
 BINARY = $(BINARY_DIR)\$(EXECUTABLE)
 
-all: $(BINARY) $(DLLS) $(OBJECTS)
+all: $(BINARY) $(BINARY_DIR) $(OBJECTS)
 
 echo_objects:
 	echo $(OBJECTS)
@@ -35,8 +34,8 @@ echo_sources:
 $(BINARY): $(OBJECTS)
 	$(LINK) $(OBJECTS) $(LIBS) /OUT:$(BINARY)
 
-$(DLLS): $(DLLS_SRC)
-	copy $** $@
+$(BINARY_DIR): $(DLLS_SRC)
+	for %n in ($**) do copy /y /v /b %n $@
 
 {$(SOURCE_DIR)\}.c{$(OBJECT_DIR)\}.obj::
 	$(CC) $(CFLAGS) $<
