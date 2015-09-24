@@ -20,7 +20,7 @@ echo Compiling multicorebsp-for-c library...
 
 echo removing .gitignore...
 pushd src
-rm .gitignore
+del /f /q .gitignore
 popd
 echo Done.
 
