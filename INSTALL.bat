@@ -6,6 +6,12 @@ echo Setting compiler environment variables...
 call vcvarsall amd64
 echo Done.
 
+echo Compiling getopt library...
+pushd ext\getopt
+nmake /f nmakefile
+popd
+echo Compiling getopt library... Done.
+
 echo Compiling pthreads library...
 pushd ext\pthreads-win32\sources\pthreads-w32-2-9-1-release
 nmake clean VC
