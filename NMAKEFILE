@@ -5,11 +5,18 @@ OBJECT_DIR = build
 BINARY_DIR = bin
 EXTERN_DIR = ext
 ###################################
+INCLUDE_DIRS =
+LIBRARIES =
+DLLS =
+EXTRA_OBJS =
+###################################
 CC = icl
 LINK = link
+###################################
 
 # Set compiler flags for MSVC or Intel C++,
 # responds to the value of the $(CC) variable.
+###################################
 !IF "$(CC)" == "cl"
 EXTRA_FLAGS = /Ox
 !ENDIF
@@ -24,10 +31,16 @@ EXTRA_FLAGS = /Wextra /Wpedantic /Qdiag-disable:remark /O3 /arch=SSSE3 \
 /D__builtin_nansf=nanf
 !ENDIF
 
-CFLAGS = /EHsc /Wall $(EXTRA_FLAGS) /c /Fo.\$(OBJECT_DIR)\ 
+CFLAGS = /EHsc /Wall $(EXTRA_FLAGS) /c /Fo.\$(OBJECT_DIR)\ $(_INCLUDE_DIRS)
+###################################
 
-LIBS =
-DLLS_SRC =
+# Insert /I flags for include directories
+###################################
+!IF "$(INCLUDE_DIRS)" != ""
+__INCLUDE_DIRS = /I $(INCLUDE_DIRS:  = )
+_INCLUDE_DIRS = /I $(_INCLUDE_DIRS: = /I )
+!ENDIF
+###################################
 
 # Build source paths
 ###################################
@@ -48,7 +61,7 @@ CPP_OBJECTS_1 = $(OBJECT_DIR)\$(CPP_SOURCES_1: = build\)
 C_OBJECTS_2 = $(C_OBJECTS_1:.c=.obj)
 CPP_OBJECTS_2 = $(CPP_OBJECTS_1:.cpp=.obj)
 
-OBJECTS = $(C_OBJECTS_2) $(CPP_OBJECTS_2)
+OBJECTS = $(C_OBJECTS_2) $(CPP_OBJECTS_2) $(EXTRA_OBJS)
 ###################################
 
 BINARY = $(BINARY_DIR)\$(EXECUTABLE)
@@ -62,9 +75,9 @@ echo_sources:
 	echo $(SOURCES)
 
 $(BINARY): $(OBJECTS)
-	$(LINK) $(OBJECT_DIR)\*.obj $(LIBS) /OUT:$(BINARY)
+	$(LINK) $(OBJECT_DIR)\*.obj $(LIBRARIES) /OUT:$(BINARY)
 
-$(BINARY_DIR): $(DLLS_SRC)
+$(BINARY_DIR): $(DLLS)
 	for %n in ($**) do copy /y /v /b %n $@
 
 {$(SOURCE_DIR)}.cpp{$(OBJECT_DIR)}.obj::
