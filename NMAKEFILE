@@ -22,7 +22,7 @@ EXTRA_FLAGS = /Ox
 EXTRA_FLAGS = /Wextra /Wpedantic /Qdiag-disable:remark /O3
 !ENDIF
 
-CFLAGS = /EHsc /Wall $(EXTRA_FLAGS) /c /Fo.\$(OBJECT_DIR)\
+CFLAGS = /EHsc /Wall $(EXTRA_FLAGS) /c /Fo.\$(OBJECT_DIR)\ 
 
 LIBS = 
 DLLS_SRC = 
