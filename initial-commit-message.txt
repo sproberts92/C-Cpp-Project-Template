@@ -1,0 +1,15 @@
+When I push new changes I rebase the master from the root and squash all commits,
+providing a clean slate for a new project. This is the commit message I use.
+
+It can safely be deleted.
+
+#################################################################################
+
+Initial commit
+
+Add directory structure.
+Add README.md.
+Add NMAKEFILE for Windows VC builds.
+Add MAKEFILE for Linux builds.
+Add SETUPT.bat for Windows installation.
+Add .gitignore in sub directories.
