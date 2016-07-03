@@ -9,6 +9,9 @@ EXTERN_DIR = ext
 CC = cl
 LINK = link
 
+# Picks all sources from src folder
+USER_SOURCES = *.c
+
 # Set compiler flags for MSVC or Intel C++,
 # responds to the value of the $(CC) variable.
 !IF "$(CC)" == "cl"
