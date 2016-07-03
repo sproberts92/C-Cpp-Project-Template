@@ -1,5 +1,5 @@
 USER_SOURCES = source.c
-EXECUTABLE = BSP.out
+EXECUTABLE = program.out
 ###################################
 SOURCE_DIR = src
 OBJECT_DIR = build
@@ -7,12 +7,12 @@ BINARY_DIR = bin
 EXTERN_DIR = ext
 ###################################
 CC = gcc
-CFLAGS = -std=c99 -I $(EXTERN_DIR)/multicorebsp-for-c/
+CFLAGS = -std=c99
 
-LIBS = -L/$(EXTERN_DIR)/multicorebsp-for-c/lib/libmcbsp1.2.0.a
+LIBS = 
 
 SOURCES = $(USER_SOURCES:%.c=$(SOURCE_DIR)/%.c)
-OBJECTS = $(USER_SOURCES:%.c=$(OBJECT_DIR)/%.o) $(EXTERN_DIR)/multicorebsp-for-c/*.o
+OBJECTS = $(USER_SOURCES:%.c=$(OBJECT_DIR)/%.o)
 
 BINARY = $(BINARY_DIR)/$(EXECUTABLE)
 
@@ -25,7 +25,7 @@ echo_sources:
 	@echo $(SOURCES)
 
 $(BINARY): $(OBJECTS)
-	$(CC) $(OBJECTS) -lpthread -lc -lrt $(LIBS) -o $(BINARY)
+	$(CC) $(OBJECTS) $(LIBS) -o $(BINARY)
 
 $(OBJECT_DIR)/%.o: $(SOURCE_DIR)/%.c
 	$(CC) $(CFLAGS) -c -o $@ $<
