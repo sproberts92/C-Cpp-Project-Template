@@ -68,6 +68,12 @@ BINARY = $(BINARY_DIR)\$(EXECUTABLE)
 
 all: $(BINARY) $(BINARY_DIR) $(OBJECTS)
 
+echo_inc:
+	echo $(_INCLUDE_DIRS)
+
+echo_libs:
+	echo $(LIBRARIES)
+
 echo_objects:
 	echo $(OBJECTS)
 
