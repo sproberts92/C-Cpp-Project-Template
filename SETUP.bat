@@ -18,6 +18,7 @@ echo removing .gitignore...
 
 del /f /q src\.gitignore
 del /f /q ext\.gitignore
+del /f /q initial-commit-message.txt
 
 echo Done.
 

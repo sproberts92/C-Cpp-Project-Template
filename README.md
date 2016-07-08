@@ -10,6 +10,8 @@ Before usage remove `src/.gitignore` and `ext/.gitignore`, these are only there 
 
 `bin/.gitignore` and `build/.gitignore` can stay as files in these directories do not need to be committed during normal usage.
 
+The file `initial-commit-message.txt` can also be removed, this is used as the commit message for the master branch when I rebase before pushing to GitHub.
+
 `SETUP.bat` will handle deletion of these files. It can then be modified to include functionality such as setting environment variables, as well as cloning and building external dependencies. Examples of this are provided inside the file.
 
 ### External dependencies
