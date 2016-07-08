@@ -66,7 +66,7 @@ OBJECTS = $(C_OBJECTS_2) $(CPP_OBJECTS_2) $(EXTRA_OBJS)
 
 BINARY = $(BINARY_DIR)\$(EXECUTABLE)
 
-all: $(BINARY) $(BINARY_DIR) $(OBJECTS)
+all: $(BINARY) $(OBJECTS) binary_dir
 
 echo_inc:
 	echo $(_INCLUDE_DIRS)
@@ -83,8 +83,8 @@ echo_sources:
 $(BINARY): $(OBJECTS)
 	$(LINK) $(OBJECT_DIR)\*.obj $(LIBRARIES) /OUT:$(BINARY)
 
-$(BINARY_DIR): $(DLLS)
-	for %n in ($**) do copy /y /v /b %n $@
+binary_dir: $(DLLS)
+	for %n in ($**) do copy /y /v /b %n $(BINARY_DIR)
 
 {$(SOURCE_DIR)}.cpp{$(OBJECT_DIR)}.obj::
 	$(CC) $(CFLAGS) $<
