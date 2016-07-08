@@ -10,7 +10,7 @@ Before usage remove `src/.gitignore` and `ext/.gitignore`, these are only there 
 
 `bin/.gitignore` and `build/.gitignore` can stay as files in these directories do not need to be committed during normal usage.
 
-`SETUP.bat` will handle deletion of these files. It can then be modified to include functionality such as setting environment variables as well as cloning and building external dependencies. Examples of this are provided inside the file.
+`SETUP.bat` will handle deletion of these files. It can then be modified to include functionality such as setting environment variables, as well as cloning and building external dependencies. Examples of this are provided inside the file.
 
 ### External dependencies
 
@@ -38,4 +38,4 @@ make -f MAKEFILE
 
 ## Project status
 
-The Windows `NMAKEFILE` is far more developed than the Linux `MAKEFILE` at present. This is because I usually develop on Windows. I intend to bring the `NMAKEFILE` up to date in the near future.
+The Windows `NMAKEFILE` is far more developed than the Linux `MAKEFILE` at present. This is because I usually develop on Windows. I intend to bring the `MAKEFILE` up to date in the near future.
