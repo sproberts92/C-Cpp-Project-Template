@@ -16,8 +16,8 @@ rem echo Compiling [...] library... Done.
 
 echo removing .gitignore...
 
-del /f /q src/.gitignore
-del /f /q ext/.gitignore
+del /f /q src\.gitignore
+del /f /q ext\.gitignore
 
 echo Done.
 
